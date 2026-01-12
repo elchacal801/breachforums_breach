@@ -23,6 +23,13 @@ The registration data indicates significant growth in user numbers over time, wi
 
 The analysis of password algorithms reveals that all users in the dataset utilized the Argon2i algorithm, a modern and secure choice for password hashing. However, the dataset did not provide information on two-factor authentication (2FA) usage, an area that could further inform the community's security practices.
 
+### Infrastructure & Anonymity (New Findings)
+
+We correlated user IP addresses against known lists of Tor Exit Nodes to gauge the operational security (OpSec) of the user base.
+
+- **Tor Usage**: 8,956 unique accounts were confirmed to have registered or accessed the site via Tor Exit Nodes.
+- **Shared Infrastructure**: We identified specific subnets (e.g., `192.42.x.x` and `109.70.x.x`) that heavily correlate with Tor traffic, indicating a significant portion of the "core" user base actively masks their location.
+
 ### Demographics (Timezones/Languages)
 
 The timezone distribution shows a concentration of users in UTC+0, with significant representation across various timezones, indicating a global user base. The language data, though limited, suggests a diverse community with widespread participation.
@@ -30,8 +37,26 @@ The timezone distribution shows a concentration of users in UTC+0, with signific
 ### Anomaly Detection (Email Domains, Usernames)
 
 - **Email Domains**: The prevalence of email domains such as gmail.com (240,278 users) and proton.me (29,883 users) highlights a preference for mainstream and privacy-focused email services. The presence of lesser-known domains like cock.li and onionmail.org suggests attempts to maintain anonymity.
-  
+
+| Domain | User Count |
+| --- | --- |
+| gmail.com | 240,278 |
+| proton.me | 29,883 |
+| protonmail.com | 12,411 |
+| onionmail.org | 4,676 |
+| cock.li | 4,580 |
+| yahoo.com | 4,492 |
+| qq.com | 3,313 |
+| mozmail.com | 2,395 |
+
 - **Usernames**: The majority of usernames are alphanumeric (322,912), with a small subset being purely numeric (1,074). The distribution of username lengths, peaking at 8 characters, indicates a tendency towards relatively short usernames, possibly for ease of use or memorability.
+
+### High-Risk TLD Presence
+
+A scan for sensitive top-level domains (TLDs) indicates potential trolling or compromised accounts, though numbers are statistically negligible.
+
+- **.GOV**: 1 account identified.
+- **.MIL / .EDU**: 0 accounts.
 
 ## 4. Conclusion
 

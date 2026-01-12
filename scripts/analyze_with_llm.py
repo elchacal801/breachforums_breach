@@ -37,26 +37,40 @@ def query_llm(api_key, context, goal):
     }
 
     prompt = f"""
-    You are a Senior Security Data Analyst.
-    I am providing you with AGGREGATE statistics from a historical partial database dump (BreachForums MyBB users).
+    You are a Senior Cyber Threat Intelligence Analyst and Responsible AI Researcher.
     
     GOAL: {goal}
     
-    DATA (CSVs):
+    CONTEXT ON PROJECT:
+    - **Event**: BreachForums (2022/2023) was a major cybercrime forum. The database was leaked.
+    - **Source**: Resecurity / Public leak (databoose.sql).
+    - **Our Repo**: An ethics-first analysis environment. We do NOT publish raw data. We only publish safe AGGREGATES.
+    - **Methodology**: 
+        1. Parse SQL dump into Docker MySQL (Isolated).
+        2. Cleaned schema (TEXT columns) and deduplicated records.
+        3. Ran SQL INT queries to count statistics (GROUP BY) -> CSV.
+        4. Visualized CSVs with Python.
+    
+    DATA (Aggregated Metrics from the Dump):
     {context}
     
     INSTRUCTIONS:
-    1. Analyze the growth trends (registration dates).
-    2. Analyze the security posture (password algos, 2FA adoption).
-    3. Analyze the community demographics (languages, timezones).
-    4. Highlight any anomalies (e.g., weird timezones or rapid growth spikes).
-    5. Output the report in Markdown format.
+    Write a comprehensive markdown report titled "BreachForums Analysis Report".
+    The report MUST include these sections:
+    1. **Executive Summary**: The breach event, significance, and our safe analysis approach.
+    2. **Methodology**: How we safely handled the data (Docker, Aggregation, No PII export).
+    3. **Data Analysis Findings**:
+       - User Growth (Registration trends).
+       - Security Posture (Password Algos, 2FA usage).
+       - Demographics (Timezones/Languages).
+       - Anomaly Detection (Email domains, Usernames).
+    4. **Conclusion**: Summary of the community structure based on the data.
     """
 
     data = {
-        "model": "gpt-4o", # Or gpt-4-turbo, etc.
+        "model": "gpt-4o", 
         "messages": [{"role": "user", "content": prompt}],
-        "temperature": 0.7
+        "temperature": 0.5
     }
 
     try:
@@ -64,7 +78,7 @@ def query_llm(api_key, context, goal):
         response.raise_for_status()
         return response.json()['choices'][0]['message']['content']
     except Exception as e:
-        return f"Error querying API: {e} - Response: {response.text if response else ''}"
+        return f"Error querying API: {e} - Response: {response.text if 'response' in locals() else 'None'}"
 
 def main():
     parser = argparse.ArgumentParser(description="Generate AI analysis from aggregate CSVs")
