@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +14,7 @@
             padding: 1rem;
             margin-bottom: 2rem;
         }
+
         .chart-img {
             max-width: 100%;
             height: auto;
@@ -20,6 +22,7 @@
         }
     </style>
 </head>
+
 <body class="bg-slate-100 text-slate-800 font-sans">
 
     <div class="container mx-auto px-4 py-8">
@@ -29,7 +32,7 @@
         </header>
 
         <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
+
             <div class="chart-container">
                 <h2 class="text-xl font-semibold mb-4">Registration Growth</h2>
                 <img src="figures/registration_growth.png" alt="Registration Growth" class="chart-img">
@@ -67,7 +70,7 @@
                 <p class="mt-2 text-sm text-slate-500">Top Level Domain distribution (.com, .ru, etc).</p>
             </div>
 
-             <div class="chart-container">
+            <div class="chart-container">
                 <h2 class="text-xl font-semibold mb-4">Username Length</h2>
                 <img src="figures/username_lengths.png" alt="Username Length" class="chart-img">
                 <p class="mt-2 text-sm text-slate-500">Distribution of username lengths.</p>
@@ -81,10 +84,78 @@
 
         </section>
 
+        <!-- Report Section -->
+        <section class="max-w-4xl mx-auto mt-12 bg-white p-8 rounded-lg shadow-md">
+            <h2 class="text-3xl font-bold mb-6 text-indigo-800 border-b pb-2">Analysis Report & Findings</h2>
+
+            <div class="prose prose-slate max-w-none">
+                <h3 class="text-xl font-bold mt-6 mb-2 text-slate-700">1. Executive Summary</h3>
+                <p class="mb-4">In 2022/2023, BreachForums, a major cybercrime forum, experienced a significant data
+                    breach resulting in the public leak of its database. This event is noteworthy due to the forum's
+                    role in facilitating cybercriminal activities and the sensitive nature of the data involved. Our
+                    analysis of the leaked data, sourced from Resecurity and the public leak (databoose.sql), was
+                    conducted with an ethics-first approach. We prioritized privacy and security by avoiding the
+                    publication of raw data and focusing solely on safe aggregate metrics. This report presents our
+                    findings, which offer insights into user behavior, security practices, and demographic distribution
+                    within the BreachForums community.</p>
+
+                <h3 class="text-xl font-bold mt-6 mb-2 text-slate-700">2. Methodology</h3>
+                <p class="mb-2">To ensure the safe handling of the leaked data, we employed a rigorous methodology:</p>
+                <ul class="list-disc ml-6 mb-4 space-y-1">
+                    <li><strong>Data Isolation</strong>: The SQL dump was parsed into a Docker-based MySQL environment,
+                        ensuring complete isolation from other systems.</li>
+                    <li><strong>Data Cleaning</strong>: We cleaned the schema, focusing on TEXT columns, and
+                        deduplicated records to maintain data integrity.</li>
+                    <li><strong>Aggregation</strong>: Using SQL INT queries, we generated aggregate statistics (e.g.,
+                        counts, GROUP BY) and exported these as CSV files.</li>
+                    <li><strong>Visualization</strong>: The aggregated data was visualized using Python to facilitate
+                        analysis without exposing any personally identifiable information (PII).</li>
+                </ul>
+
+                <h3 class="text-xl font-bold mt-6 mb-2 text-slate-700">3. Data Analysis Findings</h3>
+
+                <h4 class="font-bold mt-4 text-slate-600">User Growth (Registration Trends)</h4>
+                <p class="mb-2">The registration data indicates significant growth in user numbers over time, with
+                    notable spikes in certain months. For instance, there was a substantial increase in new user
+                    registrations in April 2024 (24,758 users), followed by a decrease in subsequent months. This
+                    pattern suggests periodic surges in forum interest or activity.</p>
+
+                <h4 class="font-bold mt-4 text-slate-600">Security Posture (Password Algorithms)</h4>
+                <p class="mb-2">The analysis of password algorithms reveals that all users in the dataset utilized the
+                    <strong>Argon2i</strong> algorithm, a modern and secure choice for password hashing. This indicates
+                    a strong default security configuration for the MyBB forum software used.</p>
+
+                <h4 class="font-bold mt-4 text-slate-600">Demographics (Timezones/Languages)</h4>
+                <p class="mb-2">The timezone distribution shows a concentration of users in UTC+0, with significant
+                    representation across various timezones, indicating a global user base. The language data, though
+                    limited, suggests a diverse community with widespread participation.</p>
+
+                <h4 class="font-bold mt-4 text-slate-600">Anomaly Detection</h4>
+                <ul class="list-disc ml-6 mb-4 space-y-1">
+                    <li><strong>Email Domains</strong>: The prevalence of email domains such as gmail.com (240k+ users)
+                        and proton.me (29k+ users) highlights a preference for mainstream and privacy-focused email
+                        services. Lesser-known domains like cock.li and onionmail.org suggest attempts to maintain
+                        anonymity.</li>
+                    <li><strong>Usernames</strong>: The majority of usernames are alphanumeric (322,912), with a small
+                        subset being purely numeric. The distribution of username lengths, peaking at 8 characters,
+                        indicates a tendency towards relatively short usernames.</li>
+                </ul>
+
+                <h3 class="text-xl font-bold mt-6 mb-2 text-slate-700">4. Conclusion</h3>
+                <p>The BreachForums community is characterized by rapid user growth, a strong security posture with
+                    modern password hashing, and a global, diverse demographic. Users exhibit a preference for
+                    privacy-centric email services and demonstrate a range of behaviors in username selection. This
+                    analysis provides valuable insights into the structure and dynamics of the community, emphasizing
+                    the importance of ethical data handling and privacy protection in cyber threat intelligence
+                    research.</p>
+            </div>
+        </section>
+
         <footer class="mt-12 text-center text-slate-500 text-sm">
             <p>Generated by Safe-Breach-Analysis-Bot | Data Source: Aggregated Metrics Only</p>
         </footer>
     </div>
 
 </body>
+
 </html>
