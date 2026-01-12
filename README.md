@@ -2,7 +2,7 @@
 
 **Research Metrics & Security Posture Analysis Only**
 
-[![View Dashboard](https://img.shields.io/badge/View-Live_Dashboard-blue?style=for-the-badge&logo=github)](https://elchacal801.github.io/breachforums_breach/dashboard/)
+[![View Dashboard](https://img.shields.io/badge/View-Live_Dashboard-blue?style=for-the-badge&logo=github)](https://elchacal801.github.io/breachforums_breach/)
 
 This repository contains code and methodology for analyzing a historical data dump from the "BreachForums" community (MyBB `users` table). The goal is to derive aggregate security insights, community growth patterns, and authentication posture statistics without exposing, processing, or retaining personally identifiable information (PII).
 
