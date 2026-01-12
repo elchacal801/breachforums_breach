@@ -23,136 +23,139 @@
     </style>
 </head>
 
-<body class="bg-slate-100 text-slate-800 font-sans">
+<body class="bg-[#0a0a0a] text-gray-300 font-mono selection:bg-red-900 selection:text-white">
 
-    <div class="container mx-auto px-4 py-8">
-        <header class="mb-8 text-center">
-            <h1 class="text-4xl font-bold mb-2 text-indigo-700">BreachForums Analysis</h1>
-            <p class="text-lg text-slate-600">Secure, Aggregate Analysis of the User Database</p>
+    <div class="container mx-auto px-6 py-8 max-w-[95%]">
+
+        <!-- Header -->
+        <header class="mb-10 text-center border-b border-red-900/30 pb-6">
+            <h1 class="text-5xl font-bold mb-2 text-red-600 tracking-tighter uppercase drop-shadow-md">BreachForums
+                Analysis</h1>
+            <p class="text-lg text-gray-500">:: Aggregate Security Metrics & Posture Analysis ::</p>
         </header>
 
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-            <div class="chart-container">
-                <h2 class="text-xl font-semibold mb-4">Registration Growth</h2>
-                <img src="figures/registration_growth.png" alt="Registration Growth" class="chart-img">
-                <p class="mt-2 text-sm text-slate-500">Monthly user registrations over time.</p>
+            <!-- LEFT COLUMN: REPORT (5 Columns Wide) -->
+            <div class="lg:col-span-5 space-y-6">
+                <section class="bg-[#111] p-8 rounded-sm border border-red-900/20 shadow-xl">
+                    <h2
+                        class="text-2xl font-bold mb-6 text-red-500 border-b border-red-900/30 pb-2 uppercase tracking-wide">
+                        [ Report & Findings ]
+                    </h2>
+
+                    <div class="prose prose-invert prose-red max-w-none text-sm leading-relaxed text-gray-400">
+                        <h3 class="text-lg font-bold mt-6 mb-2 text-gray-200">1. Executive Summary</h3>
+                        <p class="mb-4">In 2022/2023, BreachForums, a major cybercrime forum, experienced a significant
+                            data breach resulting in the public leak of its database. This event is noteworthy due to
+                            the forum's role in facilitating cybercriminal activities. Our analysis of the leaked data
+                            (databoose.sql), sourced from Resecurity, was conducted with an ethics-first approach,
+                            strictly avoiding PII handling.</p>
+
+                        <h3 class="text-lg font-bold mt-6 mb-2 text-gray-200">2. Methodology</h3>
+                        <ul class="list-disc ml-4 mb-4 space-y-1 marker:text-red-700">
+                            <li><strong>Isolation</strong>: Docker-based MySQL environment.</li>
+                            <li><strong>Sanitization</strong>: Schema cleaning & deduplication.</li>
+                            <li><strong>Aggregation</strong>: SQL counts only. No raw exports.</li>
+                        </ul>
+
+                        <h3 class="text-lg font-bold mt-6 mb-2 text-gray-200">3. Comparison Findings</h3>
+
+                        <h4 class="font-bold mt-4 text-red-400">User Growth Trends</h4>
+                        <p class="mb-2">The registration data indicates significant growth spikes, particularly in April
+                            2024 (24k+ users), suggesting viral marketing or migration events from other seized forums.
+                        </p>
+
+                        <h4 class="font-bold mt-4 text-red-400">Security Posture</h4>
+                        <p class="mb-2">100% of users utilized <strong>Argon2i</strong>, indicating a mandatory
+                            high-security default in the MyBB configuration. This suggests the forum admins prioritized
+                            credential safety against scraping.</p>
+
+                        <h4 class="font-bold mt-4 text-red-400">Demographics</h4>
+                        <p class="mb-2">Timezone data shows a massive concentration in UTC+0, likely a default setting,
+                            but tails exist in all major timezones. Language settings were predominantly English.</p>
+
+                        <h4 class="font-bold mt-4 text-red-400">Anomaly Detection</h4>
+                        <ul class="list-disc ml-4 mb-4 space-y-1 marker:text-red-700">
+                            <li><strong>Email</strong>: High usage of <span class="text-gray-300">proton.me</span> (29k)
+                                and <span class="text-gray-300">gmail.com</span> (240k).</li>
+                            <li><strong>Identity</strong>: Purely numeric usernames were rare (~1k). Short usernames (8
+                                chars) were the mode.</li>
+                        </ul>
+
+                        <h3 class="text-lg font-bold mt-6 mb-2 text-gray-200">4. Conclusion</h3>
+                        <p>The dataset reveals a "professionally" administered community with high-grade default
+                            security (Argon2i). The scale (323k users) confirms its status as a major hub before its
+                            disruption.</p>
+                    </div>
+                </section>
             </div>
 
-            <div class="chart-container">
-                <h2 class="text-xl font-semibold mb-4">Password Algorithm Used</h2>
-                <img src="figures/password_algos.png" alt="Password Algorithms" class="chart-img">
-                <p class="mt-2 text-sm text-slate-500">Distribution of hashing algorithms.</p>
+            <!-- RIGHT COLUMN: FIGURES (7 Columns Wide) -->
+            <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <div
+                    class="chart-container bg-[#111] p-4 rounded-sm border border-zinc-800 hover:border-red-900/50 transition-colors">
+                    <h2 class="text-sm font-bold mb-3 text-gray-400 uppercase">Registration Growth</h2>
+                    <img src="figures/registration_growth.png" alt="Registration Growth"
+                        class="chart-img opacity-90 hover:opacity-100">
+                </div>
+
+                <div
+                    class="chart-container bg-[#111] p-4 rounded-sm border border-zinc-800 hover:border-red-900/50 transition-colors">
+                    <h2 class="text-sm font-bold mb-3 text-gray-400 uppercase">Password Algorithms</h2>
+                    <img src="figures/password_algos.png" alt="Password Algorithms"
+                        class="chart-img opacity-90 hover:opacity-100">
+                </div>
+
+                <div
+                    class="chart-container bg-[#111] p-4 rounded-sm border border-zinc-800 hover:border-red-900/50 transition-colors">
+                    <h2 class="text-sm font-bold mb-3 text-gray-400 uppercase">Language Dist.</h2>
+                    <img src="figures/language_dist.png" alt="Language Distribution"
+                        class="chart-img opacity-90 hover:opacity-100">
+                </div>
+
+                <div
+                    class="chart-container bg-[#111] p-4 rounded-sm border border-zinc-800 hover:border-red-900/50 transition-colors">
+                    <h2 class="text-sm font-bold mb-3 text-gray-400 uppercase">Timezone Dist.</h2>
+                    <img src="figures/timezone_dist.png" alt="Timezone Distribution"
+                        class="chart-img opacity-90 hover:opacity-100">
+                </div>
+
+                <!-- New Metrics -->
+                <div
+                    class="chart-container bg-[#111] p-4 rounded-sm border border-zinc-800 hover:border-red-900/50 transition-colors">
+                    <h2 class="text-sm font-bold mb-3 text-gray-400 uppercase">Top Email Domains</h2>
+                    <img src="figures/email_domains.png" alt="Email Domains"
+                        class="chart-img opacity-90 hover:opacity-100">
+                </div>
+
+                <div
+                    class="chart-container bg-[#111] p-4 rounded-sm border border-zinc-800 hover:border-red-900/50 transition-colors">
+                    <h2 class="text-sm font-bold mb-3 text-gray-400 uppercase">Top TLDs</h2>
+                    <img src="figures/email_tlds.png" alt="Email TLDs" class="chart-img opacity-90 hover:opacity-100">
+                </div>
+
+                <div
+                    class="chart-container bg-[#111] p-4 rounded-sm border border-zinc-800 hover:border-red-900/50 transition-colors">
+                    <h2 class="text-sm font-bold mb-3 text-gray-400 uppercase">Username Length</h2>
+                    <img src="figures/username_lengths.png" alt="Username Length"
+                        class="chart-img opacity-90 hover:opacity-100">
+                </div>
+
+                <div
+                    class="chart-container bg-[#111] p-4 rounded-sm border border-zinc-800 hover:border-red-900/50 transition-colors">
+                    <h2 class="text-sm font-bold mb-3 text-gray-400 uppercase">Username Type</h2>
+                    <img src="figures/username_types.png" alt="Username Type"
+                        class="chart-img opacity-90 hover:opacity-100">
+                </div>
+
             </div>
 
-            <div class="chart-container">
-                <h2 class="text-xl font-semibold mb-4">Language Distribution</h2>
-                <img src="figures/language_dist.png" alt="Language Distribution" class="chart-img">
-                <p class="mt-2 text-sm text-slate-500">Top user-selected languages.</p>
-            </div>
+        </div>
 
-            <div class="chart-container">
-                <h2 class="text-xl font-semibold mb-4">Timezone Distribution</h2>
-                <img src="figures/timezone_dist.png" alt="Timezone Distribution" class="chart-img">
-                <p class="mt-2 text-sm text-slate-500">User self-reported timezones.</p>
-            </div>
-
-            <!-- New Metrics -->
-            <div class="chart-container">
-                <h2 class="text-xl font-semibold mb-4">Top Email Domains</h2>
-                <img src="figures/email_domains.png" alt="Email Domains" class="chart-img">
-                <p class="mt-2 text-sm text-slate-500">Most common email providers.</p>
-            </div>
-
-            <div class="chart-container">
-                <h2 class="text-xl font-semibold mb-4">Top TLDs</h2>
-                <img src="figures/email_tlds.png" alt="Email TLDs" class="chart-img">
-                <p class="mt-2 text-sm text-slate-500">Top Level Domain distribution (.com, .ru, etc).</p>
-            </div>
-
-            <div class="chart-container">
-                <h2 class="text-xl font-semibold mb-4">Username Length</h2>
-                <img src="figures/username_lengths.png" alt="Username Length" class="chart-img">
-                <p class="mt-2 text-sm text-slate-500">Distribution of username lengths.</p>
-            </div>
-
-            <div class="chart-container">
-                <h2 class="text-xl font-semibold mb-4">Username Type</h2>
-                <img src="figures/username_types.png" alt="Username Type" class="chart-img">
-                <p class="mt-2 text-sm text-slate-500">Numeric vs Alphanumeric usernames.</p>
-            </div>
-
-        </section>
-
-        <!-- Report Section -->
-        <section class="max-w-4xl mx-auto mt-12 bg-white p-8 rounded-lg shadow-md">
-            <h2 class="text-3xl font-bold mb-6 text-indigo-800 border-b pb-2">Analysis Report & Findings</h2>
-
-            <div class="prose prose-slate max-w-none">
-                <h3 class="text-xl font-bold mt-6 mb-2 text-slate-700">1. Executive Summary</h3>
-                <p class="mb-4">In 2022/2023, BreachForums, a major cybercrime forum, experienced a significant data
-                    breach resulting in the public leak of its database. This event is noteworthy due to the forum's
-                    role in facilitating cybercriminal activities and the sensitive nature of the data involved. Our
-                    analysis of the leaked data, sourced from Resecurity and the public leak (databoose.sql), was
-                    conducted with an ethics-first approach. We prioritized privacy and security by avoiding the
-                    publication of raw data and focusing solely on safe aggregate metrics. This report presents our
-                    findings, which offer insights into user behavior, security practices, and demographic distribution
-                    within the BreachForums community.</p>
-
-                <h3 class="text-xl font-bold mt-6 mb-2 text-slate-700">2. Methodology</h3>
-                <p class="mb-2">To ensure the safe handling of the leaked data, we employed a rigorous methodology:</p>
-                <ul class="list-disc ml-6 mb-4 space-y-1">
-                    <li><strong>Data Isolation</strong>: The SQL dump was parsed into a Docker-based MySQL environment,
-                        ensuring complete isolation from other systems.</li>
-                    <li><strong>Data Cleaning</strong>: We cleaned the schema, focusing on TEXT columns, and
-                        deduplicated records to maintain data integrity.</li>
-                    <li><strong>Aggregation</strong>: Using SQL INT queries, we generated aggregate statistics (e.g.,
-                        counts, GROUP BY) and exported these as CSV files.</li>
-                    <li><strong>Visualization</strong>: The aggregated data was visualized using Python to facilitate
-                        analysis without exposing any personally identifiable information (PII).</li>
-                </ul>
-
-                <h3 class="text-xl font-bold mt-6 mb-2 text-slate-700">3. Data Analysis Findings</h3>
-
-                <h4 class="font-bold mt-4 text-slate-600">User Growth (Registration Trends)</h4>
-                <p class="mb-2">The registration data indicates significant growth in user numbers over time, with
-                    notable spikes in certain months. For instance, there was a substantial increase in new user
-                    registrations in April 2024 (24,758 users), followed by a decrease in subsequent months. This
-                    pattern suggests periodic surges in forum interest or activity.</p>
-
-                <h4 class="font-bold mt-4 text-slate-600">Security Posture (Password Algorithms)</h4>
-                <p class="mb-2">The analysis of password algorithms reveals that all users in the dataset utilized the
-                    <strong>Argon2i</strong> algorithm, a modern and secure choice for password hashing. This indicates
-                    a strong default security configuration for the MyBB forum software used.</p>
-
-                <h4 class="font-bold mt-4 text-slate-600">Demographics (Timezones/Languages)</h4>
-                <p class="mb-2">The timezone distribution shows a concentration of users in UTC+0, with significant
-                    representation across various timezones, indicating a global user base. The language data, though
-                    limited, suggests a diverse community with widespread participation.</p>
-
-                <h4 class="font-bold mt-4 text-slate-600">Anomaly Detection</h4>
-                <ul class="list-disc ml-6 mb-4 space-y-1">
-                    <li><strong>Email Domains</strong>: The prevalence of email domains such as gmail.com (240k+ users)
-                        and proton.me (29k+ users) highlights a preference for mainstream and privacy-focused email
-                        services. Lesser-known domains like cock.li and onionmail.org suggest attempts to maintain
-                        anonymity.</li>
-                    <li><strong>Usernames</strong>: The majority of usernames are alphanumeric (322,912), with a small
-                        subset being purely numeric. The distribution of username lengths, peaking at 8 characters,
-                        indicates a tendency towards relatively short usernames.</li>
-                </ul>
-
-                <h3 class="text-xl font-bold mt-6 mb-2 text-slate-700">4. Conclusion</h3>
-                <p>The BreachForums community is characterized by rapid user growth, a strong security posture with
-                    modern password hashing, and a global, diverse demographic. Users exhibit a preference for
-                    privacy-centric email services and demonstrate a range of behaviors in username selection. This
-                    analysis provides valuable insights into the structure and dynamics of the community, emphasizing
-                    the importance of ethical data handling and privacy protection in cyber threat intelligence
-                    research.</p>
-            </div>
-        </section>
-
-        <footer class="mt-12 text-center text-slate-500 text-sm">
-            <p>Generated by Safe-Breach-Analysis-Bot | Data Source: Aggregated Metrics Only</p>
+        <footer class="mt-16 text-center text-zinc-700 text-xs uppercase tracking-widest border-t border-zinc-900 pt-8">
+            <p>Generated by Safe-Breach-Analysis-Bot | Data Source: Aggregated Metrics Only | NO PII EXPOSED</p>
         </footer>
     </div>
 
