@@ -95,28 +95,30 @@
             <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
 
                 <div
-                    class="chart-container bg-[#111] p-4 rounded-sm border border-zinc-800 hover:border-red-900/50 transition-colors">
-                    <h2 class="text-sm font-bold mb-3 text-gray-400 uppercase">Registration Growth</h2>
+                    class="chart-container bg-[#111] p-4 rounded-sm border border-zinc-800 hover:border-red-500/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-red-900/20 hover:shadow-lg group">
+                    <h2
+                        class="text-sm font-bold mb-3 text-gray-400 uppercase group-hover:text-red-400 transition-colors">
+                        Registration Growth</h2>
                     <img src="figures/registration_growth.png" alt="Registration Growth"
                         class="chart-img opacity-90 hover:opacity-100">
                 </div>
 
                 <div
-                    class="chart-container bg-[#111] p-4 rounded-sm border border-zinc-800 hover:border-red-900/50 transition-colors">
+                    class="chart-container bg-[#111] p-4 rounded-sm border border-zinc-800 hover:border-red-500/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-red-900/20 hover:shadow-lg group">
                     <h2 class="text-sm font-bold mb-3 text-gray-400 uppercase">Password Algorithms</h2>
                     <img src="figures/password_algos.png" alt="Password Algorithms"
                         class="chart-img opacity-90 hover:opacity-100">
                 </div>
 
                 <div
-                    class="chart-container bg-[#111] p-4 rounded-sm border border-zinc-800 hover:border-red-900/50 transition-colors">
+                    class="chart-container bg-[#111] p-4 rounded-sm border border-zinc-800 hover:border-red-500/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-red-900/20 hover:shadow-lg group">
                     <h2 class="text-sm font-bold mb-3 text-gray-400 uppercase">Language Dist.</h2>
                     <img src="figures/language_dist.png" alt="Language Distribution"
                         class="chart-img opacity-90 hover:opacity-100">
                 </div>
 
                 <div
-                    class="chart-container bg-[#111] p-4 rounded-sm border border-zinc-800 hover:border-red-900/50 transition-colors">
+                    class="chart-container bg-[#111] p-4 rounded-sm border border-zinc-800 hover:border-red-500/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-red-900/20 hover:shadow-lg group">
                     <h2 class="text-sm font-bold mb-3 text-gray-400 uppercase">Timezone Dist.</h2>
                     <img src="figures/timezone_dist.png" alt="Timezone Distribution"
                         class="chart-img opacity-90 hover:opacity-100">
@@ -124,27 +126,27 @@
 
                 <!-- New Metrics -->
                 <div
-                    class="chart-container bg-[#111] p-4 rounded-sm border border-zinc-800 hover:border-red-900/50 transition-colors">
+                    class="chart-container bg-[#111] p-4 rounded-sm border border-zinc-800 hover:border-red-500/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-red-900/20 hover:shadow-lg group">
                     <h2 class="text-sm font-bold mb-3 text-gray-400 uppercase">Top Email Domains</h2>
                     <img src="figures/email_domains.png" alt="Email Domains"
                         class="chart-img opacity-90 hover:opacity-100">
                 </div>
 
                 <div
-                    class="chart-container bg-[#111] p-4 rounded-sm border border-zinc-800 hover:border-red-900/50 transition-colors">
+                    class="chart-container bg-[#111] p-4 rounded-sm border border-zinc-800 hover:border-red-500/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-red-900/20 hover:shadow-lg group">
                     <h2 class="text-sm font-bold mb-3 text-gray-400 uppercase">Top TLDs</h2>
                     <img src="figures/email_tlds.png" alt="Email TLDs" class="chart-img opacity-90 hover:opacity-100">
                 </div>
 
                 <div
-                    class="chart-container bg-[#111] p-4 rounded-sm border border-zinc-800 hover:border-red-900/50 transition-colors">
+                    class="chart-container bg-[#111] p-4 rounded-sm border border-zinc-800 hover:border-red-500/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-red-900/20 hover:shadow-lg group">
                     <h2 class="text-sm font-bold mb-3 text-gray-400 uppercase">Username Length</h2>
                     <img src="figures/username_lengths.png" alt="Username Length"
                         class="chart-img opacity-90 hover:opacity-100">
                 </div>
 
                 <div
-                    class="chart-container bg-[#111] p-4 rounded-sm border border-zinc-800 hover:border-red-900/50 transition-colors">
+                    class="chart-container bg-[#111] p-4 rounded-sm border border-zinc-800 hover:border-red-500/50 transition-all duration-300 hover:scale-[1.02] hover:shadow-red-900/20 hover:shadow-lg group">
                     <h2 class="text-sm font-bold mb-3 text-gray-400 uppercase">Username Type</h2>
                     <img src="figures/username_types.png" alt="Username Type"
                         class="chart-img opacity-90 hover:opacity-100">
@@ -159,6 +161,50 @@
         </footer>
     </div>
 
+
+    <!-- Image Modal (Lightbox) -->
+    <div id="imageModal"
+        class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 cursor-pointer transition-opacity duration-300 opacity-0"
+        onclick="closeModal()">
+        <img id="modalImage" src="" alt="Full Size Chart"
+            class="max-h-[90vh] max-w-[90vw] rounded-sm shadow-2xl border border-red-900/50 transform scale-95 transition-transform duration-300">
+    </div>
+
+    <script>
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+
+        // Add click listeners to all chart images
+        document.querySelectorAll('.chart-img').forEach(img => {
+            img.style.cursor = 'zoom-in';
+            img.onclick = function () {
+                modal.classList.remove('hidden');
+                // Small timeout to allow display:block to apply before opacity transition
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    modalImg.classList.remove('scale-95');
+                    modalImg.classList.add('scale-100');
+                }, 10);
+                modalImg.src = this.src;
+            }
+        });
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modalImg.classList.remove('scale-100');
+            modalImg.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', function (event) {
+            if (event.key === "Escape") {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 
 </html>
