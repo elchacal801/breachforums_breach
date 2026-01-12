@@ -174,10 +174,10 @@
         const modal = document.getElementById('imageModal');
         const modalImg = document.getElementById('modalImage');
 
-        // Add click listeners to all chart images
-        document.querySelectorAll('.chart-img').forEach(img => {
-            img.style.cursor = 'zoom-in';
-            img.onclick = function () {
+        // Event Delegation for robustness (handles elements loaded dynamically or timing issues)
+        document.addEventListener('click', function (e) {
+            if (e.target && e.target.classList.contains('chart-img')) {
+                const img = e.target;
                 modal.classList.remove('hidden');
                 // Small timeout to allow display:block to apply before opacity transition
                 setTimeout(() => {
@@ -185,7 +185,7 @@
                     modalImg.classList.remove('scale-95');
                     modalImg.classList.add('scale-100');
                 }, 10);
-                modalImg.src = this.src;
+                modalImg.src = img.src;
             }
         });
 
@@ -203,6 +203,11 @@
             if (event.key === "Escape") {
                 closeModal();
             }
+        });
+
+        // Add zoom cursor style dynamically
+        document.querySelectorAll('.chart-img').forEach(img => {
+            img.style.cursor = 'zoom-in';
         });
     </script>
 </body>
